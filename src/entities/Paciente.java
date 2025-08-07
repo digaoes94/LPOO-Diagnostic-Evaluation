@@ -3,6 +3,8 @@ package entities;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import registers.HistoricoMedico;
+
 public class Paciente {
 	private String nome, cpf;
 	private LocalDate nascimento;
