@@ -3,9 +3,14 @@ package registers;
 import entities.Paciente;
 
 public class VetPaciente {
-	private Paciente[] pacientes = new Paciente[100];
+	private Paciente[] pacientes;
 	private int quant;
 	
+	public VetPaciente() {
+		this.pacientes = new Paciente[100];
+		this.quant = 0;
+	}
+
 	public Paciente getPaciente(int a) {
 		if(a >= quant) {
 			return null;
