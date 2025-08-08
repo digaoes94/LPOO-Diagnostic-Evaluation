@@ -61,43 +61,50 @@ public class AppClinica {
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private static VetPaciente cadastrar(VetPaciente vet, DateTimeFormatter dateFormat) {
 		HistoricoMedico exemplo = new HistoricoMedico();
-		System.out.print("Você pode fornecer o histórico médico do(a) paciente? Digite S para SIM ou N para NÃO:");
-		Character opcao = scan.nextLine().toLowerCase().charAt(0);
+		Paciente pacExemplo = new Paciente("rodrigo", "00000000000", LocalDate.parse("24/04/1994", dateFormat)); // paciente instanciado para fim de testes
+		vet.insere(pacExemplo);
 		
-		if(opcao != 's' && opcao != 'n') {
-			while(opcao != 's' && opcao != 'n') {
-				System.out.print("Entrada inválida, informe uma opção válida, digite S para SIM ou N para NÃO:");
-				opcao = scan.nextLine().toLowerCase().charAt(0);
-			}
-		}
+		System.out.print("Informe o CPF do paciente para verificação de ficha antiga: ");
+		String cpf = scan.nextLine();
+		int vetPesquisa = vet.pesquisa(cpf);
 		
-		if(opcao == 'n') {
-			System.out.print("Nome do(a) paciente: ");
-			String nome = scan.nextLine();
-			
-			System.out.print("CPF do(a) paciente: ");
-			String cpf = scan.nextLine();
-			
-			System.out.print("Data de nascimento do(a) paciente no formato DIA/MÊS/ANO: ");
-			LocalDate nascimento = LocalDate.parse(scan.nextLine(), dateFormat);
-			
-			vet.insere(new Paciente(nome, cpf, nascimento));
+		if(vetPesquisa == -1) {
+			System.out.println("Paciente já possui cadastro.");
+			System.out.println();
 		}
 		else {
-			System.out.print("Nome do(a) paciente: ");
-			String nome = scan.nextLine();
+			System.out.print("Você pode fornecer o histórico médico do(a) paciente? Digite S para SIM ou N para NÃO: ");
+			Character opcao = scan.nextLine().toLowerCase().charAt(0);
 			
-			System.out.print("CPF do(a) paciente: ");
-			String cpf = scan.nextLine();
+			if(opcao != 's' && opcao != 'n') {
+				while(opcao != 's' && opcao != 'n') {
+					System.out.print("Entrada inválida, informe uma opção válida, digite S para SIM ou N para NÃO:");
+					opcao = scan.nextLine().toLowerCase().charAt(0);
+				}
+			}
 			
-			System.out.print("Data de nascimento do(a) paciente no formato DIA/MÊS/ANO: ");
-			LocalDate nascimento = LocalDate.parse(scan.nextLine(), dateFormat);
-			
-			System.out.println("Cópia do histórico médico do(a) paciente: ");
-			// aqui a pessoa provavelmente teria de enviar por email ou entregar o histórico em papel mesmo,
-			// por isso isntanciei o objeto "exemplo" lá em cima
-			
-			vet.insere(new Paciente(nome, cpf, nascimento, exemplo));
+			if(opcao == 'n') {
+				System.out.print("Nome do(a) paciente: ");
+				String nome = scan.nextLine();
+				
+				System.out.print("Data de nascimento do(a) paciente no formato DIA/MÊS/ANO: ");
+				LocalDate nascimento = LocalDate.parse(scan.nextLine(), dateFormat);
+				
+				vet.insere(new Paciente(nome, cpf, nascimento));
+			}
+			else {
+				System.out.print("Nome do(a) paciente: ");
+				String nome = scan.nextLine();
+				
+				System.out.print("Data de nascimento do(a) paciente no formato DIA/MÊS/ANO: ");
+				LocalDate nascimento = LocalDate.parse(scan.nextLine(), dateFormat);
+				
+				System.out.println("Cópia do histórico médico do(a) paciente: ");
+				// aqui a pessoa provavelmente teria de enviar por email ou entregar o histórico em papel mesmo,
+				// por isso isntanciei o objeto "exemplo" lá em cima
+				
+				vet.insere(new Paciente(nome, cpf, nascimento, exemplo));
+			}
 		}
 		
 		return vet;
