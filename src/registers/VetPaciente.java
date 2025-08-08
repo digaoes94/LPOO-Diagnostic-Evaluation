@@ -20,6 +20,10 @@ public class VetPaciente {
 		}
 	}
 	
+	public Paciente[] getPacientes() {
+		return pacientes;
+	}
+
 	public int insere(Paciente pac) {
 		if(quant == 100) {
 			return -1;

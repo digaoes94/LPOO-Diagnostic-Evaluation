@@ -56,6 +56,4 @@ public class Paciente {
 		message += this.historico.toString();
 		return message;
 	}
-	
-	
 }

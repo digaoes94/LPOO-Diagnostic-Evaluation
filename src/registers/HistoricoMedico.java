@@ -36,9 +36,7 @@ public class HistoricoMedico {
 		return aux;
 	}
 	
-	
-	
-	//-------------------------------------------------------------------------------------------------------
+	//CLASSE ANINHADA ---------------------------------------------------------------------------------------
 	class EntradaMedica {
 		private String nomeMedico;
 		private LocalDate dataEntrada;
