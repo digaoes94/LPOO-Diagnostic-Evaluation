@@ -53,7 +53,13 @@ public class Paciente {
 	public String toString() {
 		String message = "";
 		message += String.format("Nome do(a) paciente: %s. CPF: %s. Nascimento: %s.\n", nome, cpf, nascimento.format(dateFormat));
-		message += this.historico.toString();
-		return message;
+		
+		if(this.historico == null) {
+			return message;
+		}
+		else {
+			message += this.historico.toString();
+			return message;
+		}
 	}
 }

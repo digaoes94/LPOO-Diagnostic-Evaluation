@@ -12,12 +12,11 @@ public class VetPaciente {
 	}
 
 	public Paciente getPaciente(int a) {
-		if(a >= quant) {
-			return null;
-		}
-		else {
-			return pacientes[a];
-		}
+		return pacientes[a];
+	}
+	
+	public int getQuant() {
+		return this.quant;
 	}
 	
 	public Paciente[] getPacientes() {
@@ -28,14 +27,14 @@ public class VetPaciente {
 		if(quant == 100) {
 			return -1;
 		}
-		if(pesquisa(pac.getCpf()) == -1) {
+		else if(pesquisa(pac.getCpf()) != -1) {
 			return -2;
 		}
-		
-		pacientes[quant] = pac;
-		quant++;
-		
-		return 0;
+		else {
+			pacientes[quant] = pac;
+			quant++;
+			return 0;
+		}
 	}
 	
 	public int pesquisa(String cpf) {
